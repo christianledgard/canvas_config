@@ -62,19 +62,19 @@ def post_item(course, module, item):
     return  post(url, item)
 
 def format_title( dia, mes, semana, prefix ='' ):
-    f = '<prefix>2020-1 <course_cod> ES <course_name>, <course_section>, Semana<course_semana>, <course_profesor>, <course_mes>/<course_dia>, <course_starts> - <course_ends> <course_type>'
-    f = f.replace('<course_cod>', course_cod)
-    f = f.replace('<course_name>', course_name)
-    f = f.replace('<course_section>', course_section)
-    f = f.replace('<course_mes>', mes)
-    f = f.replace('<course_dia>', dia)
-    f = f.replace('<course_starts>', course_starts)
-    f = f.replace('<course_ends>', course_ends)
-    f = f.replace('<course_semana>', semana)
-    f = f.replace('<course_profesor>', course_profesor)
-    f = f.replace('<course_type>', course_type)
-    f = f.replace('<prefix>', prefix)
-    return f
+    format = '<prefix>2020-1 <course_cod> ES <course_name>, <course_section>, Semana<course_semana>, <course_profesor>, <course_mes>/<course_dia>, <course_starts> - <course_ends> <course_type>'
+    format = format.replace('<course_cod>', course_cod)
+    format = format.replace('<course_name>', course_name)
+    format = format.replace('<course_section>', course_section)
+    format = format.replace('<course_mes>', mes)
+    format = format.replace('<course_dia>', dia)
+    format = format.replace('<course_starts>', course_starts)
+    format = format.replace('<course_ends>', course_ends)
+    format = format.replace('<course_semana>', semana)
+    format = format.replace('<course_profesor>', course_profesor)
+    format = format.replace('<course_type>', course_type)
+    format = format.replace('<prefix>', prefix)
+    return format
 
 def create_header(course, module, titulo):
     data = {}
@@ -123,7 +123,6 @@ i = 0
 for module in  get_modules(course):
     if module['name'].startswith('Semana '):
         i += 1
-
         if i >= first_week and i <= last_week :
             print("Configuring", module['name'])
             configure_week(module['id'], first_date)
