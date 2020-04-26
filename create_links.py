@@ -61,7 +61,7 @@ def post_item(course, module, item):
     url = url.replace('<module>', str(module))
     return  post(url, item)
 
-def fomatear_titulo( dia, mes, semana, prefix ='' ):
+def format_title( dia, mes, semana, prefix ='' ):
     f = '<prefix>2020-1 <course_cod> ES <course_name>, <course_section>, Semana<course_semana>, <course_profesor>, <course_mes>/<course_dia>, <course_starts> - <course_ends> <course_type>'
     f = f.replace('<course_cod>', course_cod)
     f = f.replace('<course_name>', course_name)
@@ -106,7 +106,7 @@ def configure_week(module_id, date):
         prefixes = ['Grabación ','']
         for prefix in prefixes:
             data = {}
-            data['module_item[title]'] = fomatear_titulo( date.strftime("%d"), date.strftime("%m"), "{:02d}".format(i), prefix=prefix)
+            data['module_item[title]'] = format_title( date.strftime("%d"), date.strftime("%m"), "{:02d}".format(i), prefix=prefix)
             data['module_item[type]'] = 'ExternalUrl'
             data['module_item[position]'] = '1'
             data['module_item[indent]'] = '1'
