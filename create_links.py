@@ -37,7 +37,8 @@ def headers():
 def get(url):
     url = url.replace('<path>', path)
     r = requests.get(url, headers = headers())
-    return r.json()
+    if r.status_code >= 400:
+        raise Exception("Unauthorized, Verify course and access_token")
 
 def post(url, data):
     url = url.replace('<path>', path)
