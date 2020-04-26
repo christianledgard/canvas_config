@@ -3,23 +3,23 @@ from datetime import timedelta
 import requests
 import json
 
-course               = '4173'
-course_cod           = 'EG0008'
-course_name          = 'Proyecto Interdisciplinario II'
-course_section       = '41' #CURSO-SECCIÓN
-course_profesor      = 'Jesus Bellido Angulo'
+course               = '4040'
+course_cod           = 'CS1100'
+course_name          = 'Introducción a la Ciencia de la Computación'
+course_section       = '1' #CURSO-SECCIÓN
+course_profesor      = 'Ernesto Cuadros Vargas'
 course_type          = 'Teoria' #"TIPO [Teoría|Labotorio]:")
 course_starts        = '09:00'  #input("HORA INICIO: HH:mm ")
 course_ends          = '11:00'  #input("HORA FIN: HH:mm ")
 dia                  = 6        #primer día de clases en Abril.
 zoom_url             = ''#input("LINK ZOOM:")
-first_week           = 1
-last_week            = 16
+first_week           = 4       # from this week
+last_week            = 16       # until this week
 # Buscar el token de acceso en https://utec.instructure.com/profile/settings
 # Entrar en Integraciones aprobadas
 # +Nuevo Token de Acceso
-# Ejemplo: '4689~tPwx4RGnTyFV7XuochO1gWtFap9jPeW7KfsjBz6IDr0HIUUY6lQnstSsghMGMNwH'
-access_token   = ''
+# Ejemplo :      '4689~tPwx4RGnTyFV7XuochO1gWtFap9jPeW7KfsjBz6IDr0HIUUY6lQnstSsghMGMNwH'
+access_token   = '4689~YGlfJyO83NJcgfv5Wh0i3MWueVk3CChndvcVih7ajZ6UgrJDXG2ceWhcqAmgBaIv'
 is_visible_videoconf = True
 is_visible_headers   = True
 is_visible_links     = True
@@ -39,6 +39,7 @@ def get(url):
     r = requests.get(url, headers = headers())
     if r.status_code >= 400:
         raise Exception("Unauthorized, Verify course and access_token")
+    return r.json()
 
 def post(url, data):
     url = url.replace('<path>', path)
