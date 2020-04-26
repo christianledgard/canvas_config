@@ -12,16 +12,16 @@ course_type          = 'Teoria' #"TIPO [Teoría|Labotorio]:")
 course_starts        = '09:00'  #input("HORA INICIO: HH:mm ")
 course_ends          = '11:00'  #input("HORA FIN: HH:mm ")
 dia                  = 6        #primer día de clases en Abril.
-zoom_url             = ''#input("LINK ZOOM:")
-first_week           = 4       # from this week
-last_week            = 5       # until this week
+zoom_url             = 'https://utec.zoom.us/j/736324554'       #input("LINK ZOOM:")
+first_week           = 4        # from this week
+last_week            = 4        # until this week
 # Buscar el token de acceso en https://utec.instructure.com/profile/settings
 # Entrar en Integraciones aprobadas
 # +Nuevo Token de Acceso
 # Ejemplo :      '4689~tPwx4RGnTyFV7XuochO1gWtFap9jPeW7KfsjBz6IDr0HIUUY6lQnstSsghMGMNwH'
 access_token   = '4689~YGlfJyO83NJcgfv5Wh0i3MWueVk3CChndvcVih7ajZ6UgrJDXG2ceWhcqAmgBaIv'
-is_visible_videoconf = True
-is_visible_headers   = True
+is_visible_videoconf = False
+is_visible_headers   = False
 is_visible_links     = True
 
 #CONNECTOR
@@ -44,6 +44,8 @@ def get(url):
 def post(url, data):
     url = url.replace('<path>', path)
     r = requests.post(url, headers = headers(), data = data)
+    if r.status_code >= 400:
+        raise Exception("Unauthorized, Verify course and access_token")
     return r.json()
 
 def get_modules(course):
@@ -61,6 +63,7 @@ def post_item(course, module, item):
     url = url_items
     url = url.replace('<course>', course)
     url = url.replace('<module>', str(module))
+    #print(item)
     return  post(url, item)
 
 def format_title( dia, mes, semana, prefix ='' ):
@@ -105,7 +108,7 @@ def configure_week(module_id, date):
         create_header(course, module_id, 'Material de clase')
 
     if is_visible_links:
-        prefixes = [('Grabación ', ''),('', zoom_url)]
+        prefixes = [('Grabación ', 'http://tu_grabacion_en_zoom.com'),('', zoom_url)]
         for prefix, url in prefixes:
             data = {}
             data['module_item[title]'] = format_title( date.strftime("%d"), date.strftime("%m"), "{:02d}".format(i), prefix=prefix)
@@ -129,7 +132,7 @@ for module in  get_modules(course):
             print("Configuring", module['name'])
             configure_week(module['id'], first_date)
         first_date = first_date + delta
-
+print('It seams we finished ... please REFRESH your browser to see to new configuration !')
 
 
 #print(modules)
