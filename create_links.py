@@ -104,14 +104,14 @@ def configure_week(module_id, date):
         create_header(course, module_id, 'Material de clase')
 
     if is_visible_links:
-        prefixes = ['Grabación ','']
-        for prefix in prefixes:
+        prefixes = [('Grabación ', ''),('', zoom_url)]
+        for prefix, url in prefixes:
             data = {}
             data['module_item[title]'] = format_title( date.strftime("%d"), date.strftime("%m"), "{:02d}".format(i), prefix=prefix)
             data['module_item[type]'] = 'ExternalUrl'
             data['module_item[position]'] = '1'
             data['module_item[indent]'] = '1'
-            data['module_item[external_url]'] = zoom_url
+            data['module_item[external_url]'] = url
             data['module_item[new_tab]'] = 1
 
             new_item = post_item(course, module_id, data)
