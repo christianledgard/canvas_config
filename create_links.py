@@ -3,32 +3,35 @@ from datetime import timedelta
 import requests
 import json
 
-course               = '4040'
-course_cod           = 'CS1100'
-course_name          = 'Introducción a la Ciencia de la Computación'
+#####################################################################################################
+#                                   Just config your course here                                    #
+course               = '4056'   # From Canvas
+course_cod           = 'CS3102' # From our curricula at the university
+course_name          = 'Estructura de datos avanzados'
 course_section       = '1' #CURSO-SECCIÓN
 course_professor     = 'Ernesto Cuadros Vargas'
 course_type          = 'Teoria' #"TIPO [Teoría|Labotorio]:")
-course_starts        = '09:00'  #input("HORA INICIO: HH:mm ")
-course_ends          = '11:00'  #input("HORA FIN: HH:mm ")
-dia                  = 6        #primer día de clases en Abril.
-zoom_url             = 'https://utec.zoom.us/j/736324554'       #input("LINK ZOOM:")
+course_starts        = '16:00'  #input("HORA INICIO: HH:mm ")
+course_ends          = '18:00'  #input("HORA FIN: HH:mm ")
+dia                  = 7        #primer día de clases en Abril.
+zoom_url             = 'https://utec.zoom.us/j/751498859'       #input("LINK ZOOM:")
 first_week           = 4        # from this week
-last_week            = 4        # until this week
-# Buscar el token de acceso en https://utec.instructure.com/profile/settings
-# Entrar en Integraciones aprobadas
-# +Nuevo Token de Acceso
-# Ejemplo :      '4689~tPwx4RGnTyFV7XuochO1gWtFap9jPeW7KfsjBz6IDr0HIUUY6lQnstSsghMGMNwH'
-access_token   = '4689~YGlfJyO83NJcgfv5Wh0i3MWueVk3CChndvcVih7ajZ6UgrJDXG2ceWhcqAmgBaIv'
-is_visible_videoconf = False
-is_visible_headers   = False
-is_visible_links     = True
+last_week            = 16        # until this week
+access_token         = ''
+print('===========================================================')
+print('Revisar https://utec.instructure.com/profile/settings      ')
+print('Entrar en Integraciones aprobadas -> +Nuevo Token de Acceso')
+access_token         = input('Ingresa tu token (ej: 4689~tPwx4RGnTyFV7XuochO1gWtFap9jPeW7KfsjBz6IDr0HIUUY6lQnstSsghMGMNwH): ')
+is_visible_videoconf = True # Add label for Videoconferencia
+is_visible_headers   = True # Add labels for Mayterial de Clase & Actividades
+is_visible_links     = True # Create links for Videoconferencia and Grabacion
 
+#####################################################################################################
 #CONNECTOR
-url_course = '<path>/<course>'
+url_course  = '<path>/<course>'
 url_modules = '<path>/<course>/modules?per_page=40'
-url_items = '<path>/<course>/modules/<module>/items'
-path = 'https://utec.instructure.com/api/v1/courses'
+url_items   = '<path>/<course>/modules/<module>/items'
+path        = 'https://utec.instructure.com/api/v1/courses'
 
 def headers():
     token = 'Bearer '+access_token
@@ -133,6 +136,6 @@ for module in  get_modules(course):
             configure_week(module['id'], first_date)
         first_date = first_date + delta
 print('It seams we finished ... please REFRESH your browser to see to new configuration !')
-
+print('This small program was created by Jesus Bellido <jbellido@utec.edu.pe>'
 
 #print(modules)
