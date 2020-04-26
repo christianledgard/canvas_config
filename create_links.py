@@ -7,14 +7,14 @@ course               = '4040'
 course_cod           = 'CS1100'
 course_name          = 'Introducción a la Ciencia de la Computación'
 course_section       = '1' #CURSO-SECCIÓN
-course_profesor      = 'Ernesto Cuadros Vargas'
+course_professor     = 'Ernesto Cuadros Vargas'
 course_type          = 'Teoria' #"TIPO [Teoría|Labotorio]:")
 course_starts        = '09:00'  #input("HORA INICIO: HH:mm ")
 course_ends          = '11:00'  #input("HORA FIN: HH:mm ")
 dia                  = 6        #primer día de clases en Abril.
 zoom_url             = ''#input("LINK ZOOM:")
 first_week           = 4       # from this week
-last_week            = 16       # until this week
+last_week            = 5       # until this week
 # Buscar el token de acceso en https://utec.instructure.com/profile/settings
 # Entrar en Integraciones aprobadas
 # +Nuevo Token de Acceso
@@ -64,7 +64,7 @@ def post_item(course, module, item):
     return  post(url, item)
 
 def format_title( dia, mes, semana, prefix ='' ):
-    format = '<prefix>2020-1 <course_cod> ES <course_name>, <course_section>, Semana<course_semana>, <course_profesor>, <course_mes>/<course_dia>, <course_starts> - <course_ends> <course_type>'
+    format = '<prefix>2020-1 <course_cod> ES <course_name>, <course_section>, Semana<course_semana>, <course_professor>, <course_mes>/<course_dia>, <course_starts> - <course_ends> <course_type>'
     format = format.replace('<course_cod>', course_cod)
     format = format.replace('<course_name>', course_name)
     format = format.replace('<course_section>', course_section)
@@ -73,7 +73,7 @@ def format_title( dia, mes, semana, prefix ='' ):
     format = format.replace('<course_starts>', course_starts)
     format = format.replace('<course_ends>', course_ends)
     format = format.replace('<course_semana>', semana)
-    format = format.replace('<course_profesor>', course_profesor)
+    format = format.replace('<course_professor>', course_professor)
     format = format.replace('<course_type>', course_type)
     format = format.replace('<prefix>', prefix)
     return format
