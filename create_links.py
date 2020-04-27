@@ -5,17 +5,17 @@ import json
 
 #####################################################################################################
 #                                   Just config your course here                                    #
-course               = '4056'   # From Canvas
-course_cod           = 'CS3102' # From our curricula at the university
-course_name          = 'Estructura de datos avanzados'
-course_section       = '1' #CURSO-SECCIÓN
-course_professor     = 'Ernesto Cuadros Vargas'
+course               = '4395'   # From Canvas
+course_cod           = 'CS2B01' # From our curricula at the university
+course_name          = 'Desarrollo Basado en Plataformas'
+course_section       = '2' #CURSO-SECCIÓN
+course_professor     = 'Jesus Bellido'
 course_type          = 'Teoria' #"TIPO [Teoría|Labotorio]:")
-course_starts        = '16:00'  #input("HORA INICIO: HH:mm ")
-course_ends          = '18:00'  #input("HORA FIN: HH:mm ")
-dia                  = 7        #primer día de clases en Abril.
-zoom_url             = 'https://utec.zoom.us/j/751498859'       #input("LINK ZOOM:")
-first_week           = 4        # from this week
+course_starts        = '18:00'  #input("HORA INICIO: HH:mm ")
+course_ends          = '20:00'  #input("HORA FIN: HH:mm ")
+dia                  = 9        #primer día de clases en Abril.
+zoom_url             = 'https://zoom.us/j/666900335'       #input("LINK ZOOM:")
+first_week           = 16        # from this week
 last_week            = 16        # until this week
 access_token         = ''
 print('===========================================================')
@@ -136,6 +136,6 @@ for module in  get_modules(course):
             configure_week(module['id'], first_date)
         first_date = first_date + delta
 print('It seams we finished ... please REFRESH your browser to see to new configuration !')
-print('This small program was created by Jesus Bellido <jbellido@utec.edu.pe>'
+print('This small program was created by Jesus Bellido <jbellido@utec.edu.pe>')
 
 #print(modules)
