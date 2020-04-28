@@ -9,12 +9,14 @@ course               = '4395'   # From Canvas
 course_cod           = 'CS2B01' # From our curricula at the university
 course_name          = 'Desarrollo Basado en Plataformas'
 course_section       = '2' #CURSO-SECCIÓN
+course_abrv          = 'DBP' #Abbreviations
 course_professor     = 'Jesus Bellido'
 course_type          = 'Teoria' #"TIPO [Teoría|Labotorio]:")
 course_starts        = '18:00'  #input("HORA INICIO: HH:mm ")
 course_ends          = '20:00'  #input("HORA FIN: HH:mm ")
 dia                  = 9        #primer día de clases en Abril.
 zoom_url             = 'https://zoom.us/j/666900335'       #input("LINK ZOOM:")
+slides_url           = 'http://bit.ly/2QrMkyU'      #OPCIONAL- input("LINK SLIDES:")
 first_week           = 16        # from this week
 last_week            = 16        # until this week
 access_token         = ''
@@ -25,6 +27,7 @@ access_token         = input('Ingresa tu token (ej: 4689~tPwx4RGnTyFV7XuochO1gWt
 is_visible_videoconf = True # Add label for Videoconferencia
 is_visible_headers   = True # Add labels for Mayterial de Clase & Actividades
 is_visible_links     = True # Create links for Videoconferencia and Grabacion
+is_visible_links_of_slides  = False # Create links for Index of Chapters
 
 #####################################################################################################
 #CONNECTOR
@@ -122,6 +125,20 @@ def configure_week(module_id, date):
             data['module_item[new_tab]'] = 1
 
             new_item = post_item(course, module_id, data)
+
+    if is_visible_links_of_slides:
+        title = "[SLIDES] Index of Chapters - <abrev>"
+        title = title.replace('<abrev>', course_abrv)
+
+        data = {}
+        data['module_item[title]'] = title
+        data['module_item[type]'] = 'ExternalUrl'
+        data['module_item[position]'] = '1'
+        data['module_item[indent]'] = '1'
+        data['module_item[external_url]'] = slides_url
+        data['module_item[new_tab]'] = 1
+
+        new_item = post_item(course, module_id, data)
 
 
 first_date = datetime.datetime(2020, 4, dia)
